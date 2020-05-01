@@ -17,63 +17,93 @@ While   more   complex   implementations   of   a   segment tree  do  exist,  th
 
 Given an sequence a[0. . .  n -1]
 1.  find the sum of elements between indices l and r in O(log n) time.
-2.  handle  changing  values  of  the  elements  of  the  array in O(log n) time
+2.  handle  changing  values  of  the  elements  of  the  array in O(log n) time.
+
+#### Segment Tree Functions
+
+1. sum - returns the sum of elements between indices l and r in O(log n) time.
+```cpp
+/**
+ *  @brief	Finds sum of consecutive elements in a range [queryLeft,queryRight).
+ *  @param	queryLeft	Left index of range for which sum has to be found.
+ *  @param	queryRight	Right index of range (Non-inclusive) for which sum has to be found.
+ *  @return	Sum of range of consecutive elements from [queryLeft, queryRight)
+ *
+ *  Takes O(logN) time.
+ */
+T sum(int queryLeft, int queryRight);
+```
+
+2. update - handle changing values of the elements of the array in O(log n) time.
+```cpp
+/**
+ *  @brief 	Modify a specific element in the tree.
+ *  @param  index	Index of element to be updated.
+ *  @param  newVal	New value of the element.
+ * 
+ *  Takes O(logN) time.
+ */
+void update(int index, T newVal);
+```
+
+####  Iterators Supported
+This implementation supports bidirectional iterators.
+
+1.  begin() -   Returns an iterator referring to the first element in the container.
+2.  end()   -   Returns an iterator referring to the first element in the container.
+3.  rbegin() -  Returns a reverse iterator referring to the last element in the container.
+4.  rend() -    Returns a reverse iterator referring to one past the first element in the container.
 
 ####  Operations
 1.  find -  Get iterator to element (public member function)
 ```cpp
 /**
- *  @brief  Finds the first element that matches key.
- *  @param  key  Element to located.
- *  @return Iterator to an element with key equivalent to key.
- * 	If no such element is found, past-the-end iterator is returned.
+ *  @brief	Finds the first element that matches val.
+ *  @param	val  Element to located.
+ *  @return	Iterator to an element with val equivalent to val.
+ *	If no such element is found, past-the-end iterator is returned.
  */
- iterator find(const T key);
+iterator find(const T val);
 ```
   
 2.  count -  Count elements with a specific value (public member function)
 ```cpp
 /**
- *  @brief  Finds the number of elements.
- *  @param  key   Element to located.
- *  @return Number of elements with specified key.
+ *  @brief	Finds the number of elements.
+ *  @param	val	Element to located.
+ *  @return	Number of elements with specified val.
  */
-int count(const T &key);
+int count(const T &val);
 ```
 3.  lower_bound - Return iterator to lower bound (public member function)
 ```cpp
 /**
- *  @brief  Finds the beginning of a subsequence matching given key.
- *  @param  key  Element to be located.
- *  @return Iterator pointing to first element equal to or greater than key, or end().
+ *  @brief	Finds the beginning of a subsequence matching given val.
+ *  @param	val	Element to be located.
+ *  @return	Iterator pointing to first element equal to or greater than val, or end().
  */
-iterator lower_bound(const T &key);
+iterator lower_bound(const T &val);
+
 ```
 4.  upper_bound - Return iterator to upper bound (public member function)
 ```cpp
 /**
- *  @brief  Finds the end of a subsequence matching given key.
- *  @param  key   Element to be located.
- *  @return Iterator pointing to the first element greater than key, or end().
+ *  @brief	Finds the end of a subsequence matching given val.
+ *  @param	val	Element to be located.
+ *  @return	Iterator pointing to the first element greater than val, or end().
  */
-iterator upper_bound(const T &key);
+iterator upper_bound(const T &val);
+
 ```
 5.  equal_range - Get range of equal elements (public member function)
 ```cpp
 /**
  *  @brief	Returns an iterator that points one past the last element in the container. 
- *  @param  key  Key to be located.
- *  @return Iterator pointing to the first element greater than key, or end().
+ *  @param	val	Element to be located.
+ *  @return	Iterator pointing to the first element greater than key, or end().
  *
  *	This is equivalent to make_pair(c.lower_bound(val), c.upper_bound(val))
  */
-std::pair<iterator, iterator> equal_range(const T &key)
+std::pair<iterator, iterator> equal_range(const T &val);
 ```
-####  Iterators Supported
-This implementation supports bidirectional iterators.
-
-1.  begin -   Returns an iterator referring to the first element in the container.
-2.  end   -   Returns an iterator referring to the first element in the container.
-3.  rbegin -  Returns a reverse iterator referring to the last element in the container.
-4.  rend -    Returns a reverse iterator referring to one past the first element in the container.
 
