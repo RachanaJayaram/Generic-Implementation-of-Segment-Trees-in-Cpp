@@ -9,8 +9,6 @@ Segment trees can be generalized to larger dimensions. 2D segment trees can be u
 
 My notes on segment trees can be found [here](https://docs.google.com/document/d/e/2PACX-1vS-ScTjtsW0UN2GmZnL8J_GBJdi4U3_7I6Gb5MRbbzNblQ-9QHwYFCLs6n95obU_zSdZBqL__4Pt4qE/pub).
 
-___
-
 ### Simple Segment Tree
 
 While   more   complex   implementations   of   a   segment tree  do  exist,  the scope of this  project is limited to  implementing  a  simple  segment  tree  with  the  following functionalities:
@@ -25,6 +23,11 @@ ___
 *  Main implementation of the segment tree is in segment_tree/segment_tree.h
 *  Tests for each functionailty is in testing/segment_tree_tests.cpp . This file also contains the runtime comparision tests of segment trees vs linear data structures for computing range based sum queries. 
 *  An example problem on sum queries for daily transactions is in testing/sample_problem.cpp
+
+Comparison of the time taken to compute ranged sum queries on an array of size 100000, with element values 1 to 100000, using a segment tree and a linear data structure was done.
+
+![](runtime.png)
+___
 
 
 #### Segment Tree Functions
@@ -120,11 +123,6 @@ std::pair<iterator, iterator> equal_range(const T &val);
 Functions indicating tree capacity -
 1. empty() - checks whether the container is empty.
 2. size() - returns the number of elements.
-___
-Comparison of the time taken to compute ranged sum queries on an array of size 100000, with element values 1 to 100000, using a segment tree and a linear data structure was done.
-
-![](runtime.png)
-
 ___
 
 
