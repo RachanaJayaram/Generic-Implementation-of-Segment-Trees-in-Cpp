@@ -76,9 +76,4 @@ This implementation supports bidirectional iterators.
 2.  end   -   Returns an iterator referring to the first element in the container.
 3.  rbegin -  Returns a reverse iterator referring to the last element in the container.
 4.  rend -    Returns a reverse iterator referring to one past the first element in the container.
-```cpp
-/**
- *  Returns an iterator referring to the first element in the container.
- */
-iterator begin();
- ```
+
