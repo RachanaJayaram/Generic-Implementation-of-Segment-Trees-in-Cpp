@@ -19,17 +19,13 @@ Given an sequence a[0. . .  n -1]
 1.  find the sum of elements between indices l and r in O(log n) time.
 2.  handle  changing  values  of  the  elements  of  the  array in O(log n) time.
 
+___
 
-#### Implementation
+### Implementation
 *  Main implementation of the segment tree is in segment_tree/segment_tree.h
 *  Tests for each functionailty is in testing/segment_tree_tests.cpp . This file also contains the runtime comparision tests of segment trees vs linear data structures for computing range based sum queries. 
 *  An example problem on sum queries for daily transactions is in testing/sample_problem.cpp
 
-Comparison of the time taken to compute ranged sum queries on an array of size 100000, with element values 1 to 100000, using a segment tree and a linear data structure was done.
-
-![](runtime.png)
-
-___
 
 #### Segment Tree Functions
 
@@ -118,4 +114,17 @@ iterator upper_bound(const T &val);
  */
 std::pair<iterator, iterator> equal_range(const T &val);
 ```
+
+#### Capacity
+
+Functions indicating tree capacity -
+1. empty() - checks whether the container is empty.
+2. size() - returns the number of elements.
+___
+Comparison of the time taken to compute ranged sum queries on an array of size 100000, with element values 1 to 100000, using a segment tree and a linear data structure was done.
+
+![](runtime.png)
+
+___
+
 
