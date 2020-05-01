@@ -4,6 +4,7 @@ namespace st
 {
 /*
 CLASS SUMMARY
+
 	// Constructors / Destructors.
 	SegmentTree();
 	SegmentTree(const SegmentTree& x);
@@ -21,11 +22,11 @@ CLASS SUMMARY
 	reverse_iterator rend();
 
 	// Operations - Standard algorithms.
-	int count(const T &key);
-	iterator find(const T key);
-	iterator lower_bound(const T &key);
-	iterator upper_bound(const T &key);
-	std::pair<iterator, iterator> equal_range(const T &key);
+	int count(const T &val);
+	iterator find(const T val);
+	iterator lower_bound(const T &val);
+	iterator upper_bound(const T &val);
+	std::pair<iterator, iterator> equal_range(const T &val);
 
 	// Capacity 
 	bool empty();
@@ -78,12 +79,9 @@ public:
 	}
 
 	/**
-       *  @brief  SegmentTree assignment operator.
-       *  @param  x  A SegmentTree of identical element and allocator types.
-       *
-       *  All the elements of @a x are copied, but unlike the copy constructor,
-       *  the allocator object is not copied.
-       */
+	 *  SegmentTree assignment operator.
+	 *  @param  x  A SegmentTree with identical element types.
+	 */
 	SegmentTree &operator=(const SegmentTree &x)
 	{
 		cont_ = new T[x.n_];
@@ -103,14 +101,14 @@ public:
 
 	/**
 	 *  @brief  Creates a segment tree from an input array.
-	 *  @param  input  Input array whose elements are used to build the segment tree.
-	 *  @param  n  Number of elements of input array to use.
+	 *  @param  input	Input array whose elements are used to build the segment tree.
+	 *  @param  n	Number of elements of input array to use.
 	 * 
 	 *   Create a segment tree consisting of copies of the elements from 0 to n - 1.
 	 * 	 This is linear in N. 
 	 *   A segment tree has at max 4*n number of nodes, where n is the size of the input.
 	 */
-	explicit SegmentTree(const T *input, int n) : cont_(new T[n]), tree_(new T[4 * n]), n_(n)
+	SegmentTree(const T *input, int n) : cont_(new T[n]), tree_(new T[4 * n]), n_(n)
 	{
 		for (int i = 0; i < n; ++i)
 		{
@@ -122,15 +120,14 @@ public:
 
 	/**
 	 *  @brief  Builds a segment tree from a range.
-	 *  @param  first  An input iterator.
-	 *  @param  last  An input iterator.
+	 *  @param  first	An input iterator.
+	 *  @param  last	An input iterator.
 	 *
 	 *  Create a segment tree consisting of copies of the elements from [first,last).
-	 *  This is linear in N if the range is already sorted, and NlogN
-	 *  otherwise (where N is distance(first,last)).
+	 *  This is linear in N. 
 	 */
 	template <typename _InputIterator>
-	explicit SegmentTree(_InputIterator first, _InputIterator last)
+	SegmentTree(_InputIterator first, _InputIterator last)
 	{
 		n_ = last - first;
 		cont_ = new T[n_];
@@ -177,17 +174,17 @@ public:
 	reverse_iterator rend() { return reverse_iterator(cont_ - 1); }
 
 	/**
-	 *  @brief  Finds the number of elements.
-	 *  @param  key  Element to located.
-	 *  @return	Number of elements with specified key.
+	 *  @brief	Finds the number of elements.
+	 *  @param	val	Element to located.
+	 *  @return	Number of elements with specified val.
 	 */
-	int count(const T &key)
+	int count(const T &val)
 	{
 		iterator first = begin(), last = end();
 		int count = 0;
 		while (first != last)
 		{
-			if (*first == key)
+			if (*first == val)
 				++count;
 			++first;
 		}
@@ -195,15 +192,15 @@ public:
 	}
 
 	/**
-	 *  @brief  Finds the first element that matches key.
-	 *  @param  key  Element to located.
-	 *  @return Iterator to an element with key equivalent to key.
-	 * 			If no such element is found, past-the-end iterator is returned.
+	 *  @brief  Finds the first element that matches val.
+	 *  @param  val  Element to located.
+	 *  @return Iterator to an element with val equivalent to val.
+	 *	If no such element is found, past-the-end iterator is returned.
 	 */
-	iterator find(const T key)
+	iterator find(const T val)
 	{
 		iterator first = begin(), last = end();
-		while (first != last && *first != key)
+		while (first != last && *first != val)
 		{
 			++first;
 		}
@@ -211,19 +208,19 @@ public:
 	}
 
 	/**
-	 *  @brief	Finds the beginning of a subsequence matching given key.
-	 *  @param  key  Key to be located.
-	 *  @return Iterator pointing to first element equal to or greater than key, or end().
+	 *  @brief	Finds the beginning of a subsequence matching given val.
+	 *  @param  val Element to be located.
+	 *  @return Iterator pointing to first element equal to or greater than val, or end().
 	 *
 	 *  This function returns the first element of a subsequence of elements
-	 *  that matches the given key.  If unsuccessful it returns an iterator
-	 *  pointing to the first element that has a greater value than given key
+	 *  that matches the given val.  If unsuccessful it returns an iterator
+	 *  pointing to the first element that has a greater value than given val
 	 *  or end() if no such element exists.
 	 */
-	iterator lower_bound(const T &key)
+	iterator lower_bound(const T &val)
 	{
 		iterator first = begin(), last = end();
-		while (first != last && *first < key)
+		while (first != last && *first < val)
 		{
 			++first;
 		}
@@ -231,14 +228,14 @@ public:
 	}
 
 	/**
-	 *  @brief	Finds the end of a subsequence matching given key.
-	 *  @param  key  Key to be located.
-	 *  @return Iterator pointing to the first element greater than key, or end().
+	 *  @brief	Finds the end of a subsequence matching given val.
+	 *  @param  val Element to be located.
+	 *  @return Iterator pointing to the first element greater than val, or end().
 	 */
-	iterator upper_bound(const T &key)
+	iterator upper_bound(const T &val)
 	{
 		iterator first = begin(), last = end();
-		while (first != last && *first <= key)
+		while (first != last && *first <= val)
 		{
 			++first;
 		}
@@ -246,12 +243,15 @@ public:
 	}
 
 	/**
-	 * Returns an iterator that points one past the last element in the container. 
-	 * 		std::make_pair(c.lower_bound(val), c.upper_bound(val))
+	 *  @brief	Returns an iterator that points one past the last element in the container. 
+	 *  @param  val Element to be located.
+	 *  @return Iterator pointing to the first element greater than val, or end().
+	 *
+	 *	This is equivalent to make_pair(c.lower_bound(val), c.upper_bound(val))
 	 */
-	std::pair<iterator, iterator> equal_range(const T &key)
+	std::pair<iterator, iterator> equal_range(const T &val)
 	{
-		return std::make_pair(lower_bound(key), upper_bound(key));
+		return std::make_pair(lower_bound(val), upper_bound(val));
 	}
 
 	///  Returns true if the SegmentTree is empty.
@@ -261,10 +261,10 @@ public:
 	int size() const { return n_; }
 
 	/**
-	 *  @brief Finds sum of consecutive elements in a range [queryLeft,queryRight).
-	 *  @param  queryLeft Left index of range for which sum has to be found.
-	 *  @param  queryRight Right index of range (Non-inclusive) for which sum has to be found.
-	 *  @return  Sum of range of consecutive elements from [queryLeft, queryRight)
+	 *  @brief	Finds sum of consecutive elements in a range [queryLeft,queryRight).
+	 *  @param	queryLeft	Left index of range for which sum has to be found.
+	 *  @param	queryRight	Right index of range (Non-inclusive) for which sum has to be found.
+	 *  @return	Sum of range of consecutive elements from [queryLeft, queryRight)
 	 *
 	 *  Takes O(logN) time.
 	 */
@@ -276,9 +276,10 @@ public:
 	}
 
 	/**
-	 *  @brief Modify a specific element in the tree.
-	 *  @param  index Index of element to be updated.
-	 *  @param  newVal New value of the element.
+	 *  @brief 	Modify a specific element in the tree.
+	 *  @param  index	Index of element to be updated.
+	 *  @param  newVal	New value of the element.
+	 * 
 	 *  Takes O(logN) time.
 	 */
 	void update(int index, T newVal)
@@ -292,10 +293,10 @@ public:
 
 private:
 	/**
-	 *  @brief Build the segment tree.
-	 *  @param  currentVertice Indice of current vertice in the segment tree.
-	 *  @param  rangeLeft Left indice in the input array of range spanned by current vertice.
-	 *  @param  rangeRight Right indice in the input array of range spanned by current vertice.
+	 *  @brief	Build the segment tree.
+	 *  @param  currentVertice	Indice of current vertice in the segment tree.
+	 *  @param  rangeLeft	Left indice in the input array of range spanned by current vertice.
+	 *  @param  rangeRight	Right indice in the input array of range spanned by current vertice.
 	 *
 	 *  Takes O(N) time - linear in size of input.
 	 */
@@ -316,12 +317,12 @@ private:
 
 	/**
 	 *  @brief  Util function to find sum of consecutive elements in a range.
-	 *  @param  queryLeft Left indice in the input array of query range.
-	 *  @param  queryRight Right indice in the input array of query range (inclusive).
-	 *  @param  currentVertice Indice of current vertice in the segment tree.
-	 *  @param  rangeLeft Left indice in the input array of range spanned by current vertice.
-	 *  @param  rangeRight Right indice in the input array of range spanned by current vertice.
-	 *  @return  Sum of range of consecutive elements from [queryLeft, queryRight]
+	 *  @param  queryLeft	Left indice in the input array of query range.
+	 *  @param  queryRight	Right indice in the input array of query range (inclusive).
+	 *  @param  currentVertice	Indice of current vertice in the segment tree.
+	 *  @param  rangeLeft	Left indice in the input array of range spanned by current vertice.
+	 *  @param  rangeRight	Right indice in the input array of range spanned by current vertice.
+	 *  @return	Sum of range of consecutive elements from [queryLeft, queryRight]
 	 * 
 	 *  Takes O(logN) time.
 	 */
@@ -341,11 +342,11 @@ private:
 
 	/**
 	 *  @brief  Util function to modify a specific element in the tree.
-	 *  @param  index Index of element to be updated.
-	 *  @param  newVal New value of the element.
-	 *  @param  currentVertice Indice of current vertice in the segment tree.
-	 *  @param  rangeLeft Left indice in the input array of range spanned by current vertice.
-	 *  @param  rangeRight Right indice in the input array of range spanned by current vertice.
+	 *  @param  index	Index of element to be updated.
+	 *  @param  newVal	New value of the element.
+	 *  @param  currentVertice	Indice of current vertice in the segment tree.
+	 *  @param  rangeLeft	Left indice in the input array of range spanned by current vertice.
+	 *  @param  rangeRight 	Right indice in the input array of range spanned by current vertice.
 	 *
 	 *  Takes O(logN) time.
 	 */
