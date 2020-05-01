@@ -295,10 +295,10 @@ TEST_CASE("Time Complexity")
   print_time(a, segmentTree1, 0, size / 32);
   print_time(a, segmentTree1, 0, size / 64);
   print_time(a, segmentTree1, 0, size / 128);
-  print_time(a, segmentTree1, size / 2, size);
-  print_time(a, segmentTree1, 1234, 5678);
-  print_time(a, segmentTree1, 1234, 2500);
+  print_time(a, segmentTree1, 1250, 3000);
+  print_time(a, segmentTree1, 1250, 1254);
 }
+
 template <typename T>
 void print_time(std::vector<T> &vect, SegmentTree<T> &seg, long int l, long int r)
 {

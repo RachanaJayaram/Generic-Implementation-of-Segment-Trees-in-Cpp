@@ -17,7 +17,8 @@ int main()
 	cout << "Checking the size of the Segment tree. Size is : " << transactions.size() << std::endl;
 
 	// Check if the size of the tree is zero.
-	cout << "Check if the size of the tree is zero : " << std::boolalpha << transactions.empty() << std::endl;
+	cout << "Check if the size of the tree is zero : " 
+		 << std::boolalpha << transactions.empty() << std::endl;
 
 	// Finding the Sum of daily transactions.
 	cout << "Sum of all the transactions" << std::endl;
