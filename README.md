@@ -19,7 +19,7 @@ Given an sequence a[0. . .  n -1]
 
 ___
 
-### Implementation
+## Implementation
 *  Main implementation of the segment tree is in segment_tree/segment_tree.h
 *  Tests for each functionailty is in testing/segment_tree_tests.cpp . This file also contains the runtime comparision tests of segment trees vs linear data structures for computing range based sum queries. 
 *  An example problem on sum queries for daily transactions is in testing/sample_problem.cpp
